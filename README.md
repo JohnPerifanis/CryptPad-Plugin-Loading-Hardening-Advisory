@@ -8,7 +8,7 @@
 **Status:** Disputed / not assigned CVE by CISA  
 **Related accepted CVE:** CVE-2025-51846  
 **Researcher assessment:** Security-significant hardening concern with scope-changing impact potential  
-**CISA position:** Technical findings not disputed, but no CVE assignment due to vendor threat model interpretation  
+**CISA position:** Technical findings not disputed, but no CVE assignment due to vendor threat model interpretation | CISA also indicated during coordination that it would not dispute another CNA assigning the issue, should another CNA reach a different conclusion under its own scope and assessment criteria.
 
 ---
 
@@ -405,6 +405,8 @@ This advisory does not dispute that CryptPad’s threat model excludes active ma
 
 CISA reviewed the issue through VINCE and did not dispute the technical findings.
 
+CISA also indicated during coordination that it would not dispute another CNA assigning the issue, should another CNA reach a different conclusion under its own scope and assessment criteria.
+
 CISA declined CVE assignment because the scenario is outside CryptPad’s declared threat model and was considered equivalent to a malicious administrator. CISA’s position was that a malicious administrator could already tamper with the server, so the plugin mechanism does not provide a meaningful net gain in attacker capability.
 
 CISA stated, in substance, that the technical findings were accepted but that the issue did not meet CISA’s criteria for CVE assignment.
@@ -575,7 +577,7 @@ The following timeline summarizes the coordination process.
 - **24 April 2026** - Related CVE-2025-51846 WebSocket DoS was published by CISA.
 - **29 April 2026** - MITRE confirmed CVE-2025-51847 was rejected and directed the researcher to the CISA dispute process.
 - **1 May 2026** - Researcher submitted additional technical evidence to CISA regarding plugin loading, served JavaScript modification, persistence, and scope change.
-- **May 2026** - CISA confirmed it did not dispute the technical findings, but maintained no CVE assignment based on CryptPad’s threat model and malicious administrator interpretation.
+- **May 2026** - CISA confirmed it did not dispute the technical findings, but maintained no CVE assignment based on CryptPad’s threat model and malicious administrator interpretation. CISA also indicated that it would not dispute another CNA assigning the issue if another CNA reached a different conclusion.
 
 ---
 
