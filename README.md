@@ -715,4 +715,4 @@ The researcher’s view is that, regardless of CVE status, the behavior is secur
 
 👤 Researcher
 John Perifanis
-Contact: https://www.linkedin.com/in/ioannis-p-9081842b9
+ | Contact: https://www.linkedin.com/in/ioannis-p-9081842b9
