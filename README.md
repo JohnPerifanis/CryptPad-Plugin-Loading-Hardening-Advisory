@@ -711,3 +711,8 @@ This advisory is published for operator awareness and hardening guidance.
 The technical findings were reviewed through coordinated disclosure. CISA did not dispute the technical evidence, but did not assign a CVE based on its interpretation of the vendor’s threat model and malicious administrator boundary.
 
 The researcher’s view is that, regardless of CVE status, the behavior is security-significant because it affects the trust boundary between the CryptPad server and the client-side code responsible for encryption.
+
+
+👤 Researcher
+John Perifanis
+Contact: https://www.linkedin.com/in/ioannis-p-9081842b9
