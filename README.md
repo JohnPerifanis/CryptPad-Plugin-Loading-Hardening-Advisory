@@ -14,7 +14,7 @@
 
 ## Executive Summary
 
-During independent security testing of CryptPad 2025.3.1, it was identified that CryptPad’s server-side plugin loading mechanism automatically loads JavaScript modules placed under the `lib/plugins/` directory without signature verification, allowlisting, sandboxing, or integrity checks.
+During the security testing of CryptPad 2025.3.1, it was identified that CryptPad’s server-side plugin loading mechanism automatically loads JavaScript modules placed under the `lib/plugins/` directory without signature verification, allowlisting, sandboxing, or integrity checks.
 
 Once loaded, a plugin executes inside the CryptPad Node.js server process. It can receive access to the server environment, including sensitive server-side values such as `Env.curvePrivate`, and can interact with internal server functionality. Testing further confirmed that the CryptPad service user can modify JavaScript files served to client browsers, including `/cryptpad/www/common/boot.js`, and that such modifications persist across container restart and are served byte-identically to clients.
 
