@@ -16,7 +16,7 @@
 
 ## Executive Summary
 
-During independent security research on CryptPad 2025.3.1, I reviewed the server-side plugin loading mechanism and identified a security-relevant hardening concern. CryptPad's plugin loader automatically loads JavaScript modules placed under `lib/plugins/` at server startup. The loading process does not enforce plugin signing, allowlisting, sandboxing, or integrity verification.
+During the security research on CryptPad 2025.3.1, I reviewed the server-side plugin loading mechanism and identified a security-relevant hardening concern. CryptPad's plugin loader automatically loads JavaScript modules placed under `lib/plugins/` at server startup. The loading process does not enforce plugin signing, allowlisting, sandboxing, or integrity verification.
 
 A loaded plugin executes inside the CryptPad Node.js process with access to the server environment. In the tested deployment, this included access to server-side environment values such as `Env.curvePrivate`, and the plugin executed as the `cryptpad` service user. That same service user had write access to client-side JavaScript files served to browsers, including `/cryptpad/www/common/boot.js`.
 
@@ -449,6 +449,25 @@ For self-hosted CryptPad deployments, the relevant operational question is:
 If the answer includes deployment automation, shared volumes, package install scripts, other containers, or administrative users who do not require plugin management access, then the deployment should be hardened.
 
 ---
+
+## What Was Proven
+
+The following points were directly verified during testing on a lab-controlled CryptPad 2025.3.1 Docker deployment:
+
+- The CryptPad plugin manager unconditionally loads JavaScript modules placed under `lib/plugins/`, excluding only `README.md`.
+- Loaded plugins execute inside the CryptPad Node.js server process.
+- A loaded plugin receives access to the server `Env` object, including sensitive server-side values such as `curvePrivate`.
+- Plugins can register additional server-side commands through the plugin integration points.
+- The CryptPad service runs as the non-root `cryptpad` user (`uid=4001`) in the tested Docker deployment.
+- The `lib/plugins/` directory is writable by the CryptPad service user.
+- A test plugin placed under `lib/plugins/` was automatically loaded after service restart.
+- A malicious plugin was able to execute server-side code and return `/etc/passwd` through the CryptPad challenge flow.
+- The client-served JavaScript file `/cryptpad/www/common/boot.js` is writable by the CryptPad service user in the tested deployment.
+- The on-disk `boot.js` file was byte-identical to the content served over HTTP to clients.
+- A harmless modification to `boot.js` persisted across container restart and was served to clients.
+- CVE-2025-51846 demonstrated that an unauthenticated WebSocket DoS can force service termination/restart, which is relevant because plugins are loaded on restart.
+
+These points form the technical basis for the advisory. The interpretation of whether this behavior meets the threshold for CVE assignment remains disputed and is documented separately in the CISA and researcher assessment sections.
 
 ## What Was Not Proven
 
